@@ -10,6 +10,7 @@ it loads the environment variable mentioned in the file to the GitHub Encrypted 
 
 .Example
 Set-GitHubSecrets
+Remove-GitHubSecrets
  
 .Example
 #.env file format
@@ -22,7 +23,9 @@ Set-GitHubSecrets
 #>
 function Set-GitHubSecrets {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
-    param()
+    param(
+        [bool] $Remove = $false
+    )
 
     $skipNextLine = $false
 
@@ -77,12 +80,25 @@ function Set-GitHubSecrets {
             $value = $kvp[1].Trim() -replace '"', '\"'
         }
 
-        Write-Verbose "$key=$value"
+        if($Remove){
+            Write-Verbose "Remove $key"
         
-        if ($PSCmdlet.ShouldProcess("secret $key", "set value $value")) {            
-            & $ghCmdName secret set $($key) -b"$($value)"
+            if ($PSCmdlet.ShouldProcess("secret $key", "set value $value")) {            
+                & $ghCmdName secret remove $($key)
+            }
+        }else {
+            Write-Verbose "$key=$value"
+        
+            if ($PSCmdlet.ShouldProcess("secret $key", "set value $value")) {            
+                & $ghCmdName secret set $($key) -b"$($value)"
+            }
         }
     }
 }
 
+function Remove-GitHubSecrets {
+    Set-GitHubSecrets -Remove $true
+}
+
 Export-ModuleMember -Function @('Set-GitHubSecrets')
+Export-ModuleMember -Function @('Remove-GitHubSecrets')

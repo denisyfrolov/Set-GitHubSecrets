@@ -10,12 +10,14 @@ Add the function Set-GitHubSecrets to the prompt function.
 
 ```powershell
 Set-GitHubSecrets
+Remove-GitHubSecrets
 ```
 
 ```powershell
 # This is function is called by convention in PowerShell
 function prompt {
     Set-GitHubSecrets
+    Remove-GitHubSecrets
 }
 ```
 Create a .env file at the folder level the environment variable has to be exported   

@@ -12,7 +12,7 @@
 RootModule = 'Set-GitHubSecrets.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.4'
+ModuleVersion = '0.0.7'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -69,7 +69,7 @@ PowerShellVersion = '5.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('Set-GitHubSecrets')
+FunctionsToExport = @('Set-GitHubSecrets', 'Remove-GitHubSecrets')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @("dotenv", ".env", "Set-GitHubSecrets", "github", "Actions", "CI", "secrets")
+        Tags = @("dotenv", ".env", "Set-GitHubSecrets", "Remove-GitHubSecrets", "github", "Actions", "CI", "secrets")
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/denisyfrolov/Set-GitHubSecrets/blob/master/LICENSE'
